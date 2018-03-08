@@ -1,0 +1,31 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.1.126:3306/LabSystem?useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: 123456
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+      properties:
+        hibernate:
+          current_session_context_class: org.springframework.orm.hibernate4.SpringSessionContext
+          use_sql_comments: true
+    http:
+      encoding:
+        charset: UTF-8
+        enabled: true
+        force: true
+    session:
+      store-type: jdbc
+file:
+#  imagePath: /Users/arlex/Desktop
+  imagePath: /var/www/images
+  facility: facility
+  user: user
+  imageUrl: http://100.64.208.218:82/
+email:
+  host: smtp.163.com
+  username: tjsse510@163.com
+  password: 510015abcd

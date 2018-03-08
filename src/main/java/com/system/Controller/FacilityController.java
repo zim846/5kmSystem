@@ -1,0 +1,75 @@
+package com.system.Controller;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.system.Enum.ResultEnum;
+import com.system.Exception.LabsException;
+import com.system.Service.FacilityService;
+import com.system.utils.AuthCheckUtil;
+import com.system.utils.ResultUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
+import java.io.InputStream;
+
+/**
+ * Created by arlex on 2017/12/1.
+ */
+@RestController
+@RequestMapping(value = "/facility")
+public class FacilityController {
+
+    @Autowired
+    FacilityService facilityService;
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public Object add(@RequestBody JsonNode body,HttpSession session) throws Exception{
+        AuthCheckUtil.check(session);
+        facilityService.add(body);
+        return ResultUtil.success();
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public Object edit(@RequestBody JsonNode body,HttpSession session) throws Exception{
+        AuthCheckUtil.check(session);
+        facilityService.edit(body);
+        return ResultUtil.success();
+    }
+
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public Object getall() throws Exception{
+        ArrayNode facilities = facilityService.getAll();
+        return ResultUtil.success(facilities);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Object delete(@RequestBody JsonNode body,HttpSession session)throws Exception{
+        AuthCheckUtil.check(session);
+        facilityService.delete(body);
+        return ResultUtil.success();
+
+    }
+
+    @PostMapping(value = "/upload")
+    public Object upload(@RequestParam("file") MultipartFile picture,HttpSession session) throws Exception{
+        AuthCheckUtil.check(session);
+        if(picture.isEmpty()){
+            throw new LabsException(ResultEnum.PARAM_NOT_FOUND.getCode(),ResultEnum.PARAM_NOT_FOUND.getMsg());
+        }
+        //getContentType返回的是image/png...
+        if(!picture.getContentType().startsWith("image")){
+            throw new LabsException(ResultEnum.FILE_TYPE_ERROR.getCode(), ResultEnum.FILE_TYPE_ERROR.getMsg());
+        }
+        // getSize 函数返回的是字节数
+        if(picture.getSize()>20*1024*1024){
+            throw new LabsException(ResultEnum.FILE_SIZE_ERROR.getCode(),ResultEnum.FILE_SIZE_ERROR.getMsg());
+        }
+        InputStream file = picture.getInputStream();
+        String contentType = picture.getContentType().split("/")[1];
+        String filePath = facilityService.uploadFacilityImage(file,contentType);
+        return ResultUtil.success(filePath);
+    }
+
+}
