@@ -1,10 +1,10 @@
 package com.system.Exception;
 
-public class LabsException  extends RuntimeException{
+public class SystemException extends RuntimeException{
     //    错误码
     private Integer code;
 
-    public LabsException(Integer code,String msg){
+    public SystemException(Integer code, String msg){
         super(msg);
         this.code = code;
     }

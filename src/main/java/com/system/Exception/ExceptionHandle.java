@@ -15,9 +15,9 @@ public class ExceptionHandle {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Object handle(Exception e){
-        if(e instanceof LabsException){
-            LabsException labsException = (LabsException) e;
-            return ResultUtil.error(labsException.getCode(),labsException.getMessage());
+        if(e instanceof SystemException){
+            SystemException systemException = (SystemException) e;
+            return ResultUtil.error(systemException.getCode(), systemException.getMessage());
         }else{
             e.printStackTrace();
             return ResultUtil.error(ResultEnum.UNKNOW_ERROR.getCode(),ResultEnum.UNKNOW_ERROR.getMsg());

@@ -1,7 +1,7 @@
 package com.system.utils;
 
 import com.system.Enum.ResultEnum;
-import com.system.Exception.LabsException;
+import com.system.Exception.SystemException;
 
 import java.io.*;
 import java.util.Random;
@@ -51,9 +51,9 @@ public class UploadUtil {
             outBuffer.flush();
             outBuffer.close();
         }catch (FileNotFoundException e){
-            throw new LabsException(ResultEnum.FILE_NOT_FOUND.getCode(),ResultEnum.FILE_NOT_FOUND.getMsg());
+            throw new SystemException(ResultEnum.FILE_NOT_FOUND.getCode(),ResultEnum.FILE_NOT_FOUND.getMsg());
         }catch (IOException e){
-            throw new LabsException(ResultEnum.FILE_UPLOAD_FAILED.getCode(),ResultEnum.FILE_UPLOAD_FAILED.getMsg());
+            throw new SystemException(ResultEnum.FILE_UPLOAD_FAILED.getCode(),ResultEnum.FILE_UPLOAD_FAILED.getMsg());
         }
     }
 

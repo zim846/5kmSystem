@@ -9,9 +9,8 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
-    @Query("select a from Admin a where a.username = ?1")
-    public Admin findByUsername(String username);
+    public Admin findOneById(Integer id);
 
-    public Admin findOneByUrl(String Url);
+    public Admin findOneByAccount(Integer account);
 
 }

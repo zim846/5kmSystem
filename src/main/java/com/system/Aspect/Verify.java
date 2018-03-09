@@ -2,7 +2,7 @@ package com.system.Aspect;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.system.Enum.ResultEnum;
-import com.system.Exception.LabsException;
+import com.system.Exception.SystemException;
 import com.system.Response.Result;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -42,7 +42,7 @@ public class Verify {
 //            logger.info("session={}",session);
 //            logger.info("session_id={}",session.getAttribute("username"));
             if(session.getAttribute("userid")==null){
-                throw new LabsException(ResultEnum.USER_VERFIY_ERROR.getCode(),ResultEnum.USER_VERFIY_ERROR.getMsg());
+                throw new SystemException(ResultEnum.USER_VERFIY_ERROR.getCode(),ResultEnum.USER_VERFIY_ERROR.getMsg());
             }
         }
     }
@@ -65,7 +65,7 @@ public class Verify {
                 session.setMaxInactiveInterval(259200);
                 ObjectNode data = (ObjectNode) result.getData();
                 session.setAttribute("userid",data.get("userid").toString());
-                session.setAttribute("superuser",data.get("superuser").toString());
+                session.setAttribute("authority",data.get("authority").toString());
             }
         }
     }

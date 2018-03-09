@@ -12,9 +12,7 @@ public class FileProperties {
 
     private String imageUrl;
 
-    private String facility;
-
-    private String user;
+    private String advertisement;
 
     public String getImagePath() {
         return imagePath;
@@ -32,36 +30,21 @@ public class FileProperties {
         this.imageUrl = imageUrl;
     }
 
-    public String getFacility() {
-        return facility;
+
+    public String getAdvertisement() {
+        return advertisement;
     }
 
-    public void setFacility(String facility) {
-        this.facility = facility;
+    public void setAdvertisement(String advertisement) {
+        this.advertisement = advertisement;
     }
 
-    public String getUser() {
-        return user;
+    public String getAdvertisementPath() {
+        return this.imagePath+ UploadUtil.separatar+this.advertisement;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getUserPath() {
-        return this.imagePath+ UploadUtil.separatar+this.user;
-    }
-
-    public String getFacilityPath() {
-        return this.imagePath+ UploadUtil.separatar+this.facility;
-    }
-
-    public String getFacilityUrl(){
-        return this.imageUrl+this.facility;
-    }
-
-    public String getUserUrl(){
-        return this.imageUrl+this.user;
+    public String getAdvertisementUrl(){
+        return this.imageUrl+this.advertisement;
     }
 
 }

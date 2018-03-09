@@ -1,7 +1,7 @@
 package com.system.utils;
 
 import com.system.Enum.ResultEnum;
-import com.system.Exception.LabsException;
+import com.system.Exception.SystemException;
 import com.system.Properties.FileProperties;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class EmailUtil {
             Matcher matcher = regex.matcher(destination);
             matcher.matches();
         }catch (Exception e){
-            throw new LabsException(ResultEnum.EMAIL_FORMAT_ERROR.getCode(),ResultEnum.EMAIL_FORMAT_ERROR.getMsg());
+            throw new SystemException(ResultEnum.EMAIL_FORMAT_ERROR.getCode(),ResultEnum.EMAIL_FORMAT_ERROR.getMsg());
         }
         // 声明Map对象，并填入用来填充模板文件的键值对
         Map<String, Object> model = new HashMap<String, Object>();

@@ -15,6 +15,7 @@ public enum ResultEnum {
     OBJECT_NOT_FOUND(501,"对象不存在"),
     PARAM_NOT_FOUND(502,"参数缺失"),
     FACILITY_NOT_ENOUGH(503,"设备库存不足"),
+    OBJECT_ALREADY_EXIST(504,"对象已经存在"),
 
     FILE_NOT_FOUND(601,"文件不存在"),
     FILE_TYPE_ERROR(602,"文件格式错误"),
